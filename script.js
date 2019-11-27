@@ -1,6 +1,7 @@
 const dataInput = document.querySelector('#data-input');
 const dataFormat = document.querySelector('#data-format');
 const dataAliases = document.querySelector('#data-aliases');
+const btnSplitInput = document.querySelector('#split-input');
 
 const data = document.querySelector('#data');
 const dataResidue = document.querySelector('#data-residue');
@@ -24,7 +25,8 @@ const previewBox = document.querySelector('#preview-box');
 dataInput.addEventListener('change', () => onDataChange());
 dataFormat.addEventListener('change', () => onDataChange());
 dataAliases.addEventListener('change', () => onDataChange());
-templateInput.addEventListener('change', () => onDataChange());
+btnSplitInput.addEventListener('click', ()=> onDataChange());
+//templateInput.addEventListener('change', () => onDataChange());
 
 btnApplyTemplate.addEventListener('click', () => applyTemplate());
 btnPreviewHTML.addEventListener('click', () => previewHTML());
