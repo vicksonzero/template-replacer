@@ -5,10 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+
+    <style>
+        .input-tables td {
+            vertical-align: top;
+        }
+    </style>
 </head>
 
 <body>
-    <table>
+    <table class="input-tables">
         <tr>
             <td>data-input</td>
             <td>data-format</td>
@@ -26,7 +32,7 @@
             </td>
         </tr>
     </table>
-    <table>
+    <table class="input-tables">
         <tr>
             <td>data <span id="data-count-label"></span></td>
             <td>data-residue</td>
@@ -48,16 +54,26 @@
     </div>
 
     <div>
+        <label for="iterate-by-js">Iterate by JS</label>
+        <input type="checkbox" name="iterate-by-js" id="iterate-by-js">
+        <button id="apply-template">Apply Template</button>
+        <button id="preview-html">Preview HTML</button>
+    </div>
+
+    <div>
         output
         <br>
-        <textarea name="output" id="output" cols="60" rows="7"></textarea>
+        <textarea name="output" id="output" cols="60" rows="30"></textarea>
 
     </div>
 
-    
-    <script type = "text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
+    <div id="preview-box">
+    </div>
 
-    <!-- <script src="handlebars.runtime-v4.5.3.js"></script> -->
+
+    <!-- <script type = "text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script> -->
+
+    <script src="handlebars.web-v4.1.0.js"></script>
     <script src="script.js"></script>
 </body>
 
