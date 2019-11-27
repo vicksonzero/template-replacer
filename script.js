@@ -30,6 +30,7 @@ btnApplyTemplate.addEventListener('click', () => applyTemplate());
 btnPreviewHTML.addEventListener('click', () => previewHTML());
 
 function onDataChange() {
+    document.querySelectorAll('.error').forEach((elem) => elem.innerText = '');
 
     console.log('onDataChange', [
         dataInput.value,
@@ -40,9 +41,14 @@ function onDataChange() {
     ]);
 
     const aliasList = dataAliases.value.split('\n');
-
-    const splitRegex = new RegExp(dataFormat.value, 'gm'); // global multiline
-    const tokenRegex = new RegExp(dataFormat.value, 'm'); // global multiline
+    let splitRegex;
+    let tokenRegex;
+    try {
+        splitRegex = new RegExp(dataFormat.value, 'gm'); // global multiline
+        tokenRegex = new RegExp(dataFormat.value, 'm'); // global multiline
+    } catch (error) {
+        document.querySelector('#data-format-error').innerText = error;
+    }
 
     // const canMatch = dataRegex.match(dataInput.value);
     const residue = dataInput.value.replace(splitRegex, '');
@@ -92,15 +98,19 @@ function onDataChange() {
 }
 
 function applyTemplate() {
-    // compile the template
-    const template = Handlebars.compile(templateInput.value);
-    window.template = template;
-    // execute the compiled template and print the output to the console
+    try {
+        // compile the template
+        const template = Handlebars.compile(templateInput.value);
+        window.template = template;
+        // execute the compiled template and print the output to the console
 
-    if (checkboxIterateByJS.checked) {
-        output.value = tokensList.map((tokens) => template(tokens)).join('\n\n');
-    } else {
-        output.value = template(tokensList);
+        if (checkboxIterateByJS.checked) {
+            output.value = tokensList.map((tokens) => template(tokens)).join('\n\n');
+        } else {
+            output.value = template(tokensList);
+        }
+    } catch (error) {
+        document.querySelector('#template-input-error').innerText = error;
     }
 }
 

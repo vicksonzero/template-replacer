@@ -10,6 +10,10 @@
         .input-tables td {
             vertical-align: top;
         }
+
+        .error {
+            color: red;
+        }
     </style>
 </head>
 
@@ -17,7 +21,7 @@
     <table class="input-tables">
         <tr>
             <td>data-input</td>
-            <td>data-format</td>
+            <td>data-format<br><pre id="data-format-error" class="error"></pre></td>
             <td>data-aliases</td>
         </tr>
         <tr>
@@ -49,6 +53,8 @@
 
     <div>
         template-input
+        <br>
+        <pre id="template-input-error" class="error"></pre>
         <br>
         <textarea name="template-input" id="template-input" cols="60" rows="7"></textarea>
     </div>
