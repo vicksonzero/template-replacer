@@ -1,6 +1,8 @@
 # template-replacer
+
 Simple regex split / replace, with handlebar template support
 
+Version 1 written in 3 hours (thanks npm)
 
 # How to use
 
@@ -18,11 +20,11 @@ Simple regex split / replace, with handlebar template support
 
 # TODO
 
-- save as one file for reuse
-- bootstrap
-- code editor (monarch by microsoft?)
-- handlebar helpers
-
+- Save as file for reuse (or other persistence)
+- Bootstrap
+- Code editor (monarch by microsoft?)
+- Handlebar helpers
+- Common file format tokenizer cheatsheet (such as csv)
 
 
 
