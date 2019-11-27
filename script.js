@@ -40,7 +40,7 @@ function onDataChange() {
         output.value,
     ]);
 
-    const aliasList = dataAliases.value.split('\n');
+    const aliasList = ['_fullMatch', ...dataAliases.value.split('\n')];
     let splitRegex;
     let tokenRegex;
     try {
@@ -48,6 +48,7 @@ function onDataChange() {
         tokenRegex = new RegExp(dataFormat.value, 'm'); // global multiline
     } catch (error) {
         document.querySelector('#data-format-error').innerText = error;
+        throw error;
     }
 
     // const canMatch = dataRegex.match(dataInput.value);
@@ -85,7 +86,7 @@ function onDataChange() {
         .map((tokens, matchIndex) => {
             const result = {};
 
-            tokens.forEach((token, i) => (result[aliasList[i - 1] || i] = token));
+            tokens.forEach((token, i) => (result[aliasList[i] || i] = token));
 
             result._matchIndex = matchIndex;
             result._input = tokens.input;
@@ -111,6 +112,7 @@ function applyTemplate() {
         }
     } catch (error) {
         document.querySelector('#template-input-error').innerText = error;
+        throw error;
     }
 }
 
