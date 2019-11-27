@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td>data-input</td>
+            <td>data-format</td>
+            <td>data-aliases</td>
+        </tr>
+        <tr>
+            <td>
+                <textarea name="data-input" id="data-input" cols="50" rows="14"></textarea>
+            </td>
+            <td>
+                <textarea name="data-format" id="data-format" cols="50" rows="14"></textarea>
+            </td>
+            <td>
+                <textarea name="data-aliases" id="data-aliases" cols="10" rows="14"></textarea>
+            </td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>data <span id="data-count-label"></span></td>
+            <td>data-residue</td>
+        </tr>
+        <tr>
+            <td>
+                <textarea name="data" id="data" cols="60" rows="7"></textarea>
+            </td>
+            <td>
+                <textarea name="data-residue" id="data-residue" cols="30" rows="7"></textarea>
+            </td>
+        </tr>
+    </table>
+
+    <div>
+        template-input
+        <br>
+        <textarea name="template-input" id="template-input" cols="60" rows="7"></textarea>
+    </div>
+
+    <div>
+        output
+        <br>
+        <textarea name="output" id="output" cols="60" rows="7"></textarea>
+
+    </div>
+
+    
+    <script type = "text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js"></script>
+
+    <!-- <script src="handlebars.runtime-v4.5.3.js"></script> -->
+    <script src="script.js"></script>
+</body>
+
+</html>
