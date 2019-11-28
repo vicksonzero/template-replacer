@@ -5,7 +5,7 @@ const btnSplitInput = document.querySelector('#split-input');
 
 const data = document.querySelector('#data');
 const dataResidue = document.querySelector('#data-residue');
-const templateInput = document.querySelector('#template-input');
+// const templateInput = document.querySelector('#template-input');
 const checkboxIterateByJS = document.querySelector('#iterate-by-js');
 const btnApplyTemplate = document.querySelector('#apply-template');
 const output = document.querySelector('#output');
@@ -25,20 +25,27 @@ const previewBox = document.querySelector('#preview-box');
 dataInput.addEventListener('change', () => onDataChange());
 dataFormat.addEventListener('change', () => onDataChange());
 dataAliases.addEventListener('change', () => onDataChange());
-btnSplitInput.addEventListener('click', ()=> onDataChange());
+btnSplitInput.addEventListener('click', () => onDataChange());
 //templateInput.addEventListener('change', () => onDataChange());
 
 btnApplyTemplate.addEventListener('click', () => applyTemplate());
 btnPreviewHTML.addEventListener('click', () => previewHTML());
 
+document.querySelectorAll('.error').forEach((elem) => {
+    elem.innerText = '';
+    elem.style.display = 'none';
+});
 function onDataChange() {
-    document.querySelectorAll('.error').forEach((elem) => elem.innerText = '');
+    document.querySelectorAll('.error').forEach((elem) => {
+        elem.innerText = '';
+        elem.style.display = 'none';
+    });
 
     console.log('onDataChange', [
         dataInput.value,
         dataFormat.value,
         data.value,
-        templateInput.value,
+        templateInputB.getModel().getValue(),
         output.value,
     ]);
 
@@ -50,6 +57,7 @@ function onDataChange() {
         tokenRegex = new RegExp(dataFormat.value, 'm'); // global multiline
     } catch (error) {
         document.querySelector('#data-format-error').innerText = error;
+        document.querySelector('#data-format-error').style.display = 'block';
         throw error;
     }
 
@@ -103,7 +111,7 @@ function onDataChange() {
 function applyTemplate() {
     try {
         // compile the template
-        const template = Handlebars.compile(templateInput.value);
+        const template = Handlebars.compile(templateInputB.getModel().getValue());
         window.template = template;
         // execute the compiled template and print the output to the console
 
@@ -151,15 +159,15 @@ function initData() {
         'size\n' +
         'description';
 
-    templateInput.value = '<table>\n' +
-        '{{#each this}}\n' +
-        '<tr style="font-size:{{math size "/" 2}}px;">\n' +
-        '    <td>{{@index}}</td>\n' +
-        '    <td>{{name}}</td>\n' +
-        '    <td>{{description}}</td>\n' +
-        '</tr>\n' +
-        '{{/each}}\n' +
-        '</table>';
+    // templateInput.value = '<table>\n' +
+    //     '{{#each this}}\n' +
+    //     '<tr style="font-size:{{math size "/" 2}}px;">\n' +
+    //     '    <td>{{@index}}</td>\n' +
+    //     '    <td>{{name}}</td>\n' +
+    //     '    <td>{{description}}</td>\n' +
+    //     '</tr>\n' +
+    //     '{{/each}}\n' +
+    //     '</table>';
 }
 
 Handlebars.registerHelper("math", function (lValue, operator, rValue, options) {
