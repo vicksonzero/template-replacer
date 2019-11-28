@@ -21,6 +21,9 @@ require(['vs/editor/editor.main'], function () {
         language: 'plaintext',
     });
     dataInputB.onDidBlurEditorWidget(() => onDataChange());
+    (document.querySelector('span[data-editor-id="data-input-b"]')
+        .appendChild(createLanguageSelector(dataInputB))
+    );
 
     const dataFormatB = monaco.editor.create(document.getElementById('data-format-b'), {
         value: '',
@@ -33,18 +36,26 @@ require(['vs/editor/editor.main'], function () {
         value: '',
         language: 'plaintext',
         minimap: { enabled: false },
+        lineNumbers: "off",
     });
     dataAliasesB.onDidBlurEditorWidget(() => onDataChange());
-    
+
     const dataOutputB = monaco.editor.create(document.getElementById('data-output-b'), {
         value: '',
         language: 'json',
     });
+    (document.querySelector('span[data-editor-id="data-output-b"]')
+        .appendChild(createDummyLanguageSelector('json'))
+    );
+
     const dataResidueB = monaco.editor.create(document.getElementById('data-residue-b'), {
         value: '',
         language: 'json',
         minimap: { enabled: false },
     });
+    (document.querySelector('span[data-editor-id="data-residue-b"]')
+        .appendChild(createDummyLanguageSelector('json'))
+    );
     const templateInputB = monaco.editor.create(document.getElementById('template-input-b'), {
         value: '<table>\n' +
             '{{#each this}}\n' +
@@ -57,17 +68,27 @@ require(['vs/editor/editor.main'], function () {
             '</table>',
         language: 'handlebars',
     });
-    
+    (document.querySelector('span[data-editor-id="template-input-b"]')
+        .appendChild(createDummyLanguageSelector('handlebars'))
+    );
+
     const outputB = monaco.editor.create(document.getElementById('output-b'), {
         value: '',
         language: 'plaintext',
         minimap: { enabled: false },
     });
+    (document.querySelector('span[data-editor-id="output-b"]')
+        .appendChild(createLanguageSelector(outputB))
+    );
 
     window.onresize = () => {
-        templateInputB.layout();
+        dataInputB.layout();
+        dataFormatB.layout();
+        dataAliasesB.layout();
         dataOutputB.layout();
         dataResidueB.layout();
+        templateInputB.layout();
+        outputB.layout();
     };
 
 
@@ -234,6 +255,99 @@ require(['vs/editor/editor.main'], function () {
         //     '</tr>\n' +
         //     '{{/each}}\n' +
         //     '</table>';
+    }
+
+    function createLanguageSelector(editor) {
+        const list = [
+            'abap',
+            'aes',
+            'apex',
+            'azcli',
+            'bat',
+            'c',
+            'clojure',
+            'coffeescript',
+            'cpp',
+            'csharp',
+            'csp',
+            'css',
+            'dockerfile',
+            'fsharp',
+            'go',
+            'graphql',
+            'handlebars',
+            'html',
+            'ini',
+            'java',
+            'javascript',
+            'json',
+            'kotlin',
+            'less',
+            'lua',
+            'markdown',
+            'mips',
+            'msdax',
+            'mysql',
+            'objective-c',
+            'pascal',
+            'pascaligo',
+            'perl',
+            'pgsql',
+            'php',
+            'plaintext',
+            'postiats',
+            'powerquery',
+            'powershell',
+            'pug',
+            'python',
+            'r',
+            'razor',
+            'redis',
+            'redshift',
+            'ruby',
+            'rust',
+            'sb',
+            'scheme',
+            'scss',
+            'shell',
+            'sol',
+            'sql',
+            'st',
+            'swift',
+            'tcl',
+            'twig',
+            'typescript',
+            'vb',
+            'xml',
+            'yaml',
+        ];
+
+        const select = document.createElement('select');
+        list.forEach((item) => {
+            const option = document.createElement('option');
+            option.value = item;
+            option.innerHTML = item;
+            if (item === 'plaintext') option.selected = 'selected';
+            select.appendChild(option);
+        });
+
+        select.addEventListener('change', ({ target }) => {
+            monaco.editor.setModelLanguage(editor.getModel(), target.value);
+        })
+        return select;
+    }
+
+    function createDummyLanguageSelector(item) {
+
+        const select = document.createElement('select');
+        const option = document.createElement('option');
+        option.value = item;
+        option.innerHTML = item;
+        option.selected = 'selected';
+        select.appendChild(option);
+        select.disabled = 'disabled';
+
+        return select;
     }
 
     Handlebars.registerHelper("math", function (lValue, operator, rValue, options) {
