@@ -21,8 +21,8 @@ Version 1 written in 3 hours (thanks npm)
 # TODO
 
 - Save as file for reuse (or other persistence)
-- Bootstrap
-- Code editor (monarch by microsoft?)
+- ~Bootstrap~
+- ~Code editor (monarch by microsoft?)~
 - Handlebar helpers
 - Common file format tokenizer cheatsheet (such as csv)
 
