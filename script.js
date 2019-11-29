@@ -193,6 +193,10 @@ require(['vs/editor/editor.main'], function () {
     }
 
     function applyTemplate() {
+        document.querySelectorAll('.error').forEach((elem) => {
+            elem.innerText = '';
+            elem.style.display = 'none';
+        });
         try {
             // compile the template
             const template = Handlebars.compile(templateInputB.getValue());
