@@ -206,6 +206,7 @@ require(['vs/editor/editor.main'], function () {
             }
         } catch (error) {
             document.querySelector('#template-input-error').innerText = error;
+            document.querySelector('#template-input-error').style.display = 'block';
             throw error;
         }
     }
