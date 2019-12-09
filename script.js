@@ -19,6 +19,7 @@ require(['vs/editor/editor.main'], function () {
     const dataInputB = monaco.editor.create(document.getElementById('data-input-b'), {
         value: '',
         language: 'plaintext',
+        mouseWheelScrollSensitivity: 0.2,
     });
     dataInputB.onDidBlurEditorWidget(() => onDataChange());
     (document.querySelector('span[data-editor-id="data-input-b"]')
@@ -29,6 +30,7 @@ require(['vs/editor/editor.main'], function () {
         value: '',
         language: 'plaintext',
         minimap: { enabled: false },
+        mouseWheelScrollSensitivity: 0.2,
     });
     dataFormatB.onDidBlurEditorWidget(() => onDataChange());
 
@@ -37,12 +39,14 @@ require(['vs/editor/editor.main'], function () {
         language: 'plaintext',
         minimap: { enabled: false },
         lineNumbers: "off",
+        mouseWheelScrollSensitivity: 0.2,
     });
     dataAliasesB.onDidBlurEditorWidget(() => onDataChange());
 
     const dataOutputB = monaco.editor.create(document.getElementById('data-output-b'), {
         value: '',
         language: 'json',
+        mouseWheelScrollSensitivity: 0.2,
     });
     (document.querySelector('span[data-editor-id="data-output-b"]')
         .appendChild(createDummyLanguageSelector('json'))
@@ -52,6 +56,7 @@ require(['vs/editor/editor.main'], function () {
         value: '',
         language: 'json',
         minimap: { enabled: false },
+        mouseWheelScrollSensitivity: 0.2,
     });
     (document.querySelector('span[data-editor-id="data-residue-b"]')
         .appendChild(createDummyLanguageSelector('json'))
@@ -67,6 +72,7 @@ require(['vs/editor/editor.main'], function () {
             '{{/each}}\n' +
             '</table>',
         language: 'handlebars',
+        mouseWheelScrollSensitivity: 0.2,
     });
     (document.querySelector('span[data-editor-id="template-input-b"]')
         .appendChild(createDummyLanguageSelector('handlebars'))
@@ -76,6 +82,7 @@ require(['vs/editor/editor.main'], function () {
         value: '',
         language: 'plaintext',
         minimap: { enabled: false },
+        mouseWheelScrollSensitivity: 0.2,
     });
     (document.querySelector('span[data-editor-id="output-b"]')
         .appendChild(createLanguageSelector(outputB))
