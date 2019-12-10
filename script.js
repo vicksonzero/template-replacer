@@ -97,6 +97,27 @@ require(['vs/editor/editor.main'], function () {
         templateInputB.layout();
         outputB.layout();
     };
+    document.querySelectorAll('.btn-size.minus').forEach((btnMinus) => {
+        const editorId = (btnMinus.dataset || {}).editorId;
+        if (editorId) {
+            btnMinus.addEventListener('click', () => {
+                const editor = document.querySelector(`#${editorId}`);
+
+                editor.style.height = Math.max(100, editor.style.height - 100);
+            })
+        }
+    });
+
+    document.querySelectorAll('.btn-size.plus').forEach((btnPlus) => {
+        const editorId = (btnPlus.dataset || {}).editorId;
+        if (editorId) {
+            btnPlus.addEventListener('click', () => {
+                const editor = document.querySelector(`#${editorId}`);
+
+                editor.style.height = Math.max(100, editor.style.height - 100);
+            })
+        }
+    });
 
 
 
