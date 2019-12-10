@@ -105,7 +105,7 @@ require(['vs/editor/editor.main'], function () {
             btnMinus.addEventListener('click', () => {
                 const editor = document.querySelector(`#${editorId}`);
 
-                editor.style.height = Math.max(200, (parseFloat(editor.style.height)||0) - 100) + 'px';
+                editor.style.height = Math.max(200, (parseFloat(editor.style.height)||0) - 200) + 'px';
                 editors[editorId].layout();
             })
         }
@@ -117,7 +117,7 @@ require(['vs/editor/editor.main'], function () {
             btnPlus.addEventListener('click', () => {
                 const editor = document.querySelector(`#${editorId}`);
 
-                editor.style.height = ((parseFloat(editor.style.height)||0) + 100) + 'px';
+                editor.style.height = ((parseFloat(editor.style.height)||0) + 200) + 'px';
                 editors[editorId].layout();
             })
         }
