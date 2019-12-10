@@ -113,10 +113,10 @@ require(['vs/editor/editor.main'], function () {
         const editorId = (btnPlus.dataset || {}).editorId;
         if (editorId) {
             btnPlus.addEventListener('click', () => {
-                const editor = document.querySelector(`#${editorId}`).children[0];
+                const editor = document.querySelector(`#${editorId}`);
 
                 editor.style.height = ((parseFloat(editor.style.height)||0) + 100) + 'px';
-                editor.layout();
+                editor.children[0].layout();
             })
         }
     });
