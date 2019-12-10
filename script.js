@@ -1,6 +1,8 @@
 
 require.config({ paths: { 'vs': 'monaco-editor/min/vs' } });
 require(['vs/editor/editor.main'], function () {
+    const editors = {};
+    
     const dataInput = document.querySelector('#data-input');
     // const dataFormat = document.querySelector('#data-format');
     // const dataAliases = document.querySelector('#data-aliases');
@@ -16,7 +18,7 @@ require(['vs/editor/editor.main'], function () {
     const previewBox = document.querySelector('#preview-box');
 
 
-    const dataInputB = monaco.editor.create(document.getElementById('data-input-b'), {
+    const dataInputB = editors['data-input-b'] = monaco.editor.create(document.getElementById('data-input-b'), {
         value: '',
         language: 'plaintext',
         mouseWheelScrollSensitivity: 0.2,
@@ -26,7 +28,7 @@ require(['vs/editor/editor.main'], function () {
         .appendChild(createLanguageSelector(dataInputB))
     );
 
-    const dataFormatB = monaco.editor.create(document.getElementById('data-format-b'), {
+    const dataFormatB = editors['data-format-b'] = monaco.editor.create(document.getElementById('data-format-b'), {
         value: '',
         language: 'plaintext',
         minimap: { enabled: false },
@@ -34,7 +36,7 @@ require(['vs/editor/editor.main'], function () {
     });
     dataFormatB.onDidBlurEditorWidget(() => onDataChange());
 
-    const dataAliasesB = monaco.editor.create(document.getElementById('data-aliases-b'), {
+    const dataAliasesB = editors['data-aliases-b'] = monaco.editor.create(document.getElementById('data-aliases-b'), {
         value: '',
         language: 'plaintext',
         minimap: { enabled: false },
@@ -43,7 +45,7 @@ require(['vs/editor/editor.main'], function () {
     });
     dataAliasesB.onDidBlurEditorWidget(() => onDataChange());
 
-    const dataOutputB = monaco.editor.create(document.getElementById('data-output-b'), {
+    const dataOutputB = editors['data-output-b'] = monaco.editor.create(document.getElementById('data-output-b'), {
         value: '',
         language: 'json',
         mouseWheelScrollSensitivity: 0.2,
@@ -52,7 +54,7 @@ require(['vs/editor/editor.main'], function () {
         .appendChild(createDummyLanguageSelector('json'))
     );
 
-    const dataResidueB = monaco.editor.create(document.getElementById('data-residue-b'), {
+    const dataResidueB = editors['data-residue-b'] = monaco.editor.create(document.getElementById('data-residue-b'), {
         value: '',
         language: 'json',
         minimap: { enabled: false },
@@ -61,7 +63,7 @@ require(['vs/editor/editor.main'], function () {
     (document.querySelector('span[data-editor-id="data-residue-b"]')
         .appendChild(createDummyLanguageSelector('json'))
     );
-    const templateInputB = monaco.editor.create(document.getElementById('template-input-b'), {
+    const templateInputB = editors['template-input-b'] = monaco.editor.create(document.getElementById('template-input-b'), {
         value: '<table>\n' +
             '{{#each this}}\n' +
             '<tr style="font-size:{{math size "/" 2}}px;">\n' +
@@ -78,7 +80,7 @@ require(['vs/editor/editor.main'], function () {
         .appendChild(createDummyLanguageSelector('handlebars'))
     );
 
-    const outputB = monaco.editor.create(document.getElementById('output-b'), {
+    const outputB = editors['output-b'] = monaco.editor.create(document.getElementById('output-b'), {
         value: '',
         language: 'plaintext',
         minimap: { enabled: false },
@@ -104,7 +106,7 @@ require(['vs/editor/editor.main'], function () {
                 const editor = document.querySelector(`#${editorId}`);
 
                 editor.style.height = Math.max(100, (parseFloat(editor.style.height)||0) - 100) + 'px';
-                editor.children[0].layout();
+                editors[editorId].layout();
             })
         }
     });
@@ -116,7 +118,7 @@ require(['vs/editor/editor.main'], function () {
                 const editor = document.querySelector(`#${editorId}`);
 
                 editor.style.height = ((parseFloat(editor.style.height)||0) + 100) + 'px';
-                editor.children[0].layout();
+                editors[editorId].layout();
             })
         }
     });
